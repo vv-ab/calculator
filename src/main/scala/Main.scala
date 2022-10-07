@@ -13,28 +13,49 @@ def main(): Unit = {
     """.stripMargin
 
   var keepRunning = true
+  var lastResult: Float = 0
   while (keepRunning) {
-  println(text)
 
-  val operation = Console.in.readLine().toInt
+    println(text)
+
+    val operation = Console.in.readLine().toInt
+
     if (operation < 5 && operation > 0) {
-      println("Enter x:")
-      val x = Console.in.readLine().toInt
-      println("Enter y")
-      val y = Console.in.readLine().toInt
+
+      print("Enter x (Number or 'r'): ")
+      val xInput = Console.in.readLine()
+      var x: Float = 0
+      if (xInput == "r") {
+        x = lastResult
+      }
+      else {
+        x = xInput.toFloat
+      }
+
+      print("Enter y (Number or 'r'): ")
+      val yInput = Console.in.readLine()
+      var y: Float = 0
+      if (yInput == "r") {
+        y = lastResult
+      }
+      else {
+        y = yInput.toFloat
+      }
 
       if (operation == 1) {
-        println("Result:" + (x + y))
+        lastResult = x + y
       }
       else if (operation == 2) {
-        println("Result:" + (x - y))
+        lastResult = x - y
       }
       else if (operation == 3) {
-        println("Result:" + (x * y))
+        lastResult = x * y
       }
       else if (operation == 4) {
-        println("Result:" + (x / y))
+        lastResult = x / y
       }
+
+      println(s"Result: $lastResult")
     }
     else if (operation == 5) {
       keepRunning = false
